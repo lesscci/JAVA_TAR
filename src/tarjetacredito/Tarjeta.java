@@ -4,12 +4,14 @@
  */
 package tarjetacredito;
 
+import java.util.Scanner;
+
 /**
  *
  * @author taller2
  */
 public  class Tarjeta {
-
+static Scanner entrada = new Scanner(System.in);
     //ATRIBUTOS
     int numero;
     String titular;
@@ -51,7 +53,7 @@ public  class Tarjeta {
 
     //CONTRUCTORES
     public Tarjeta() {
-        System.out.println("Esta tarjeta no tiene información :(");
+        System.out.println("Tarjeta vacia...");
     }
 
     public Tarjeta(int numero, String titular, String entidad, int fechaCaducidad) {
@@ -68,11 +70,22 @@ public  class Tarjeta {
     }
 
     //METODOS
-    public void d(){
-        
-    }
-    public void activar() {
-        System.out.println("Activando la tarjeta");
+   
+    
+    public static void activar() {
+  
+        boolean salir = false;
+        char opcion;
+        while (!salir){
+            System.out.println("Quieres activar la tarjeta? S/N");
+            opcion = entrada.next().charAt(0);
+            
+            switch(opcion){
+                case 1: System.out.println("Activando...");
+                            ;
+                case 2: System.out.println("La tarjeta permanece desactivada");
+            }
+        }
     }
 
     public void pagar() {

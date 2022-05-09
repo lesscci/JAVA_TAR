@@ -6,6 +6,7 @@ package tarjetacredito;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import static tarjetacredito.Tarjeta.activar;
 
 /**
  *
@@ -13,8 +14,8 @@ import java.util.Scanner;
  */
 public class TarjetaCredito {
 
-    Scanner entrada = new Scanner(System.in);
-    ArrayList<Tarjeta> tarjetas = new ArrayList();
+    static Scanner entrada = new Scanner(System.in);
+    private static final ArrayList<Tarjeta> listadoTarjetas = new ArrayList<Tarjeta>();
 
     public static void main(String[] args) {
 
@@ -34,10 +35,11 @@ public class TarjetaCredito {
 
             System.out.println("""
                                1. Anadir nueva tarjeta
-                               2. Activar
-                               3. Pagar 
-                               4. Anular
-                               5. Salir
+                               2. Mostrar Tarjetas
+                               3. Activar
+                               4. Pagar
+                               5. Anular
+                               6. Salir
                                ******************************""");
 
             System.out.println("Escribe una de las opciones");
@@ -47,13 +49,16 @@ public class TarjetaCredito {
                 case 1:
                     System.out.println("Has seleccionado la opcion 1");
                     datosTarjetas();
-
                     break;
+
                 case 2:
                     System.out.println("Has seleccionado la opcion 2");
+                    mostrarContactos();
                     break;
+                    
                 case 3:
                     System.out.println("Has seleccionado la opcion 3");
+                    activar();
                     break;
                 case 4:
                     System.out.println("Has seleccionado la opcion 4");
@@ -70,17 +75,41 @@ public class TarjetaCredito {
     }
 
     private void datosTarjetas() {
+        Tarjeta tarjeta = new Tarjeta();
+        listadoTarjetas.add(tarjeta);
+
         System.out.println("Escriba el numero de tarjeta");
         int numero = entrada.nextInt();
-        System.out.println("Escriba el nombre y apellido del titular");
-        String titular = entrada.nextLine();
-        System.out.println("Escriba el nombre de la entidad");
-        String entidad = entrada.nextLine();
+        tarjeta.setNumero(numero);
+
         System.out.println("Escriba el año de caducidad de la tarjeta");
         int fechaCaducidad = entrada.nextInt();
-        
-        tarjetas.add(numero, titular, entidad, fechaCaducidad);
+        tarjeta.setFechaCaducidad(fechaCaducidad);
 
+        System.out.println("Escriba el nombre de la entidad");
+        String entidad = entrada.next();
+        tarjeta.setEntidad(entidad);
+
+        System.out.println("Escriba el nombre y apellido del titular");
+        String titular = entrada.next();
+        tarjeta.setTitular(titular);
+    }
+
+    public static void mostrarContactos() {
+        if (listadoTarjetas.isEmpty()) {
+            System.out.println("La agenda está vacía, no hay contactos que mostrar");
+        } else {
+            for (int i = 0; i < listadoTarjetas.size(); i++) {
+                System.out.println("**************************************************"
+                        + "\nNúmero de tarjeta: " + listadoTarjetas.get(i).numero
+                        + "\nAño de caducidad: " + listadoTarjetas.get(i).fechaCaducidad
+                        + "\nNombre de la entidad: " + listadoTarjetas.get(i).entidad
+                        + "\nNombre del titular: " + listadoTarjetas.get(i).titular
+                        + "\n**************************************************");
+
+   
+         }
+        }
     }
 
 }
