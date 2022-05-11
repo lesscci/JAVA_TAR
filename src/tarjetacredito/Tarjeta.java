@@ -5,18 +5,21 @@
 package tarjetacredito;
 
 import java.util.Scanner;
+import static tarjetacredito.TarjetaCredito.listadoTarjetas;
 
 /**
  *
  * @author taller2
  */
-public  class Tarjeta {
-static Scanner entrada = new Scanner(System.in);
+public class Tarjeta {
+
+    static Scanner entrada = new Scanner(System.in);
     //ATRIBUTOS
     int numero;
     String titular;
     String entidad;
     int fechaCaducidad;
+    String status;
 
     //GETTERS AND SETTERS
     public int getNumero() {
@@ -51,49 +54,39 @@ static Scanner entrada = new Scanner(System.in);
         this.fechaCaducidad = fechaCaducidad;
     }
 
-    //CONTRUCTORES
-    public Tarjeta() {
-        System.out.println("Tarjeta vacia...");
+    public String getStatus() {
+        return status;
     }
 
-    public Tarjeta(int numero, String titular, String entidad, int fechaCaducidad) {
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    //CONTRUCTORES
+    public Tarjeta() {
+        this.status = "OFF";
+    }
+
+    public Tarjeta(String titular, String entidad, int numero, int fechaCaducidad, String status) {
 
         this.numero = numero;
         this.titular = titular;
         this.entidad = entidad;
         this.fechaCaducidad = fechaCaducidad;
+        this.status = status;
 
-        System.out.println("Número de tarjeta: " + this.numero
-                + "\nNombre del títular: " + this.titular
+        System.out.println("Nombre del títular: " + this.titular
+                + "\nNúmero de tarjeta: " + this.numero
                 + "\nNombre de la entidad: " + this.entidad
-                + "\nFecha de caducidad: " + this.fechaCaducidad);
+                + "\nFecha de caducidad: " + this.fechaCaducidad
+                + "\nEstado de la tarjeta: " + this.status);
     }
 
-    //METODOS
-   
-    
-    public static void activar() {
-  
-        boolean salir = false;
-        char opcion;
-        while (!salir){
-            System.out.println("Quieres activar la tarjeta? S/N");
-            opcion = entrada.next().charAt(0);
-            
-            switch(opcion){
-                case 1: System.out.println("Activando...");
-                            ;
-                case 2: System.out.println("La tarjeta permanece desactivada");
-            }
-        }
-    }
-
-    public void pagar() {
-        System.out.println("Pagando");
-    }
-
-    public void anular() {
-        System.out.println("Anulando");
+    //STRINGS JUNTOS
+    @Override
+    public String toString() {
+        return "Tarjeta {" + "Títular= " + titular + ", Entidad= " + entidad + ", Número de tarjeta= " + numero
+                + ", Fecha caducidad= " + fechaCaducidad + ", Estado de la tarejta= " + status;
     }
 
 }
